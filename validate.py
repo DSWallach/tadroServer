@@ -36,19 +36,20 @@ filenames = ['Qsparsity00.csv','Qsparsity01.csv', 'Qsparsity02.csv',
                  'Qsparsity09.csv']
 random.seed(seed)
 sparsity = 0
-for i in range(10):
-    filename = filenames[i]
-    f = open(filename, 'w')
-    f.write(str(filename)+'\n')
-    f.write('Network ID, Q score\n')
-    print('Generating sparsity: '+str(i)+'\n')
-    for i in range(10000):
-        tann = tadroANN(0,0,0,i,sparsity,inputs,hidden,outputs)
-        newGraph = graphQ()
-        qScore = newGraph.calcTadroQ(tann)
-        f.write(str(i)+', '+str(qScore)+'\n')
-    sparsity += 0.1
-    f.close()
+#for i in range(10):
+#    filename = filenames[i]
+f = open("testSpar09.csv", 'w')
+#    spar = 
+#    f.write(str(filename)+'\n')
+#    f.write('Network ID, Q score\n')
+#    print('Generating sparsity: '+str(i)+'\n')
+for j in range(10000):
+    tann = tadroANN(0,0,0,j,0.9,inputs,hidden,outputs)
+    newGraph = graphQ()
+    qScore = newGraph.calcTadroQ(tann)
+    f.write(str(newGraph.edges)+', '+str(qScore)+'\n')
+#    sparsity += 0.1
+f.close()
         
 
 #for ann in generation:
