@@ -14,7 +14,6 @@ def score(testFile, checkFile):
         for i in range(1,len(checkLines)):
             checkBin = 0
             testBin = 0
-        
             testValues = testLines[i].split(',');
             checkValues = checkLines[i].split(',');
             
@@ -52,7 +51,7 @@ def score(testFile, checkFile):
             else:
                 testBin = 7
 
-            score += (7 - abs(testBin - checkBin))
+            score += (4 - abs(testBin - checkBin))
             
             if (int(checkValues[5]) == 0):
                 checkBin = 0
@@ -96,7 +95,7 @@ def score(testFile, checkFile):
         
 print("ID,testScore");
 for i in range(600000):
-    ideal = "idealPerformance.csv"
+    ideal = "idealInput.csv"
     testFile = 'testFiles/'+str(i)+'output.csv'
     testScore = score(testFile,ideal);
     print(str(i)+','+str(testScore))
