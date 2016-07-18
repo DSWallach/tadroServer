@@ -3,6 +3,53 @@ import string
 
 testLength = 16
 
+def simpleScore(testFile, checkFile):
+    score = 0
+    testF = open(testFile, 'r')
+    checkF = open(checkFile, 'r')
+    testLines = testF.readlines()
+    checkLines = checkF.readlines()
+   
+    for i in range(1,len(checkLines)):
+        checkBin = 0
+        testBin = 0
+        testValues = testLines[i].split(',');
+        checkValues = checkLines[i].split(',');
+        if (int(checkValues[4]) < 0):
+            checkBin = 0
+        elif (int(checkValues[4]) == 0):
+            checkBin = 1
+        elif (int(checkValues[4]) > 0):
+            checkBin = 2
+
+        if (int(testValues[4]) < 0):
+            testBin = 0
+        elif (int(testValues[4]) == 0):
+            testBin = 1
+        elif (int(testValues[4]) > 0):
+            testBin = 2
+            
+        if (testBin == checkBin):
+            score += 1
+
+        if (int(checkValues[5]) < 0):
+            checkBin = 0
+        elif (int(checkValues[5]) == 0):
+            checkBin = 1
+        elif (int(checkValues[5]) > 0):
+            checkBin = 2
+
+        if (int(testValues[5]) < 0):
+            testBin = 0
+        elif (int(testValues[5]) == 0):
+            testBin = 1
+        elif (int(testValues[5]) > 0):
+            testBin = 2
+
+        if (testBin == checkBin):
+            score += 1
+    return score
+            
 def score(testFile, checkFile):
     score = 0
     testF = open(testFile, 'r')
@@ -94,7 +141,7 @@ def score(testFile, checkFile):
         return 0
         
 print("ID,testScore");
-for i in range(600000):
+for i in range(1500000):
     ideal = "idealInput.csv"
     testFile = 'testFiles/'+str(i)+'output.csv'
     testScore = score(testFile,ideal);
