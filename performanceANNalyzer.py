@@ -1,7 +1,51 @@
 import copy
 import string
 
-testLength = 16
+testLength = 4
+
+def basicScore(testFile, checkFile):
+    score = 0
+    testF = open(testFile, 'r')
+    checkF = open(checkFile, 'r')
+    testLines = testF.readlines()
+    checkLines = checkF.readlines()
+    maxScore = 0
+    for i in range(0,len(checkLines)):
+        checkBin = 0
+        testBin = 0
+        testValues = testLines[i].split(',');
+        checkValues = checkLines[i].split(',');
+        if (int(checkValues[4]) == 0):
+            checkBin = 0
+        else:
+            checkBin = 1
+
+        if (int(testValues[4]) == 0):
+            testBin = 0
+        else:
+            testBin = 1
+            
+        if (checkBin == testBin):
+            score += 1
+        else:
+            score -= 1
+
+        if (int(checkValues[5]) == 0):
+            checkBin = 0
+        else:
+            checkBin = 1
+
+        if (int(testValues[5]) == 0):
+            testBin = 0
+        else:
+            testBin = 1
+
+        if (testBin == checkBin):
+            score += 1
+        else:
+            score -= 1
+    return score
+            
 
 def simpleScore(testFile, checkFile):
     score = 0
@@ -134,16 +178,21 @@ def score(testFile, checkFile):
             else:
                 testBin = 7
 
-        score += (7 - abs(testBin - checkBin))
+            score += (4 - abs(testBin - checkBin))
         return score
     except IOError:
         print("no file")
         return 0
         
 print("ID,testScore");
-for i in range(1500000):
-    ideal = "idealInput.csv"
+log = open("performanceLog.csv", 'w')
+ideal = "basicInput.csv"
+maxScore = basicScore(ideal,ideal)
+log.write('Maxscore: '+str(maxScore))
+for i in range(400000):
     testFile = 'testFiles/'+str(i)+'output.csv'
-    testScore = score(testFile,ideal);
+    testScore = basicScore(testFile,ideal);
+    log.write(str(i)+','+str(testScore)+'\n')
     print(str(i)+','+str(testScore))
+
 score(ideal,ideal);
