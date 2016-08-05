@@ -185,13 +185,13 @@ def score(testFile, checkFile):
         return 0
         
 print("ID,testScore");
-log = open("performanceLog.csv", 'w')
-ideal = "basicInput.csv"
+log = open("netPerflog.csv", 'w')
+ideal = "idealInput.csv"
 maxScore = basicScore(ideal,ideal)
 log.write('Maxscore: '+str(maxScore))
-for i in range(400000):
+for i in range(100000):
     testFile = 'testFiles/'+str(i)+'output.csv'
-    testScore = basicScore(testFile,ideal);
+    testScore = score(testFile,ideal);
     log.write(str(i)+','+str(testScore)+'\n')
     print(str(i)+','+str(testScore))
 
